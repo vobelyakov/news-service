@@ -1,14 +1,9 @@
 package com.v72.novatek.newsservice.controllers;
 
 import com.v72.novatek.newsservice.models.News;
+import com.v72.novatek.newsservice.models.NewsCategory;
 import com.v72.novatek.newsservice.repository.NewsRepository;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +18,11 @@ public class NewsController {
     @GetMapping("/news")
     List<News> getAllNews() {
         return repository.findAll();
+    }
+
+    @GetMapping("/news/category/{category}")
+    List<News> getAllNewsByCategory(@PathVariable NewsCategory category) {
+        return repository.findByCategory(category);
     }
 
     @PostMapping("/news")
