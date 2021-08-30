@@ -32,6 +32,10 @@ public class News {
         this.publishDate = new Date();
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -76,4 +80,7 @@ public class News {
     public String toString() {
         return "News{" + "id=" + this.id + ", title='" + this.title + '\'' + ", author='" + this.author + '\''+ ", publishDate='" + this.publishDate.toString() + '\'' + '}';
     }
+
+
+
 }
