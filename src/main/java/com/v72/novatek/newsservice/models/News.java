@@ -13,7 +13,8 @@ public class News {
     @Lob
     private String content;
 
-    private String author;
+    @ManyToOne
+    private Author author;
 
     private Date publishDate;
 
@@ -22,7 +23,7 @@ public class News {
 
     public News() {}
 
-    public News(String title, String content, String author, NewsCategory category) {
+    public News(String title, String content, Author author, NewsCategory category) {
         this.title = title;
         this.content = content;
 
@@ -52,11 +53,11 @@ public class News {
         this.content = content;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 
