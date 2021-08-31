@@ -1,4 +1,4 @@
-package com.v72.novatek.newsservice.models;
+package com.v72.novatek.newsservice.core.models;
 
 public enum NewsCategory {
     Politics,

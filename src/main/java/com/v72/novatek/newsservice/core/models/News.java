@@ -1,4 +1,4 @@
-package com.v72.novatek.newsservice.models;
+package com.v72.novatek.newsservice.core.models;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -31,6 +31,10 @@ public class News {
         this.category = category;
 
         this.publishDate = new Date();
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {

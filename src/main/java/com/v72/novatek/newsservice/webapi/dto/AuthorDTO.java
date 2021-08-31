@@ -1,4 +1,4 @@
-package com.v72.novatek.newsservice.dto;
+package com.v72.novatek.newsservice.webapi.dto;
 
 public class AuthorDTO {
     private Long id;

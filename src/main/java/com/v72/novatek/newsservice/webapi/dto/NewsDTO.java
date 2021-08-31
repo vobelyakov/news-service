@@ -1,6 +1,4 @@
-package com.v72.novatek.newsservice.dto;
-
-import com.v72.novatek.newsservice.models.News;
+package com.v72.novatek.newsservice.webapi.dto;
 
 public class NewsDTO {
 
@@ -63,6 +61,7 @@ public class NewsDTO {
     public void setCategory(String category) {
         this.category = category;
     }
+
 
 
 }

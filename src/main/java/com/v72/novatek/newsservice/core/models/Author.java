@@ -1,10 +1,9 @@
-package com.v72.novatek.newsservice.models;
+package com.v72.novatek.newsservice.core.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
 
 @Entity
 public class Author {
@@ -34,5 +33,10 @@ public class Author {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "News{" + "id=" + this.id + ", name='" + this.name + '}';
     }
 }

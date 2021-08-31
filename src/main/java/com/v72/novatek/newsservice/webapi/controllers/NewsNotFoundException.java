@@ -1,4 +1,4 @@
-package com.v72.novatek.newsservice.controllers;
+package com.v72.novatek.newsservice.webapi.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
