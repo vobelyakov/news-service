@@ -7,8 +7,10 @@ import com.v72.novatek.newsservice.core.models.News;
 import com.v72.novatek.newsservice.core.models.NewsCategory;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -44,6 +46,9 @@ public class NewsController {
     @GetMapping("/news/author/{id}")
     List<NewsDTO> getAllNewsByAuthor(@PathVariable Long id) {
         var author = authorService.getAuthorById(id);
+
+        if (author.getName() == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Author not found");
 
         return newsService.getNewsByAuthor(author)
                 .stream()
