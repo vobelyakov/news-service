@@ -1,15 +1,20 @@
 package com.v72.novatek.newsservice.webapi.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class NewsDTO {
 
+    @ApiModelProperty(hidden = true)
     private Long id;
 
     private String title;
 
     private String content;
 
+    @ApiModelProperty(hidden = true)
     private AuthorDTO author;
 
+    @ApiModelProperty(hidden = true)
     private String publishDate;
 
     private String category;

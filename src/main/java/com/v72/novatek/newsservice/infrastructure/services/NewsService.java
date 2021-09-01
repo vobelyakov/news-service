@@ -9,6 +9,7 @@ import com.v72.novatek.newsservice.infrastructure.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,6 +29,7 @@ public class NewsService implements INewsService {
     @Override
     public void updateNews(News news) {
         news.setAuthor(authorService.getRandomAuthor());
+        news.setPublishDate(new Date());
         repository.save(news);
     }
 
@@ -39,6 +41,7 @@ public class NewsService implements INewsService {
     @Override
     public News createNews(News news) {
         news.setAuthor(authorService.getRandomAuthor());
+        news.setPublishDate(new Date());
         return repository.save(news);
     }
 

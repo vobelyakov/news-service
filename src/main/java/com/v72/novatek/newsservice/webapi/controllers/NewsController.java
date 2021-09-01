@@ -37,7 +37,12 @@ public class NewsController {
     }
 
     @PostMapping("/news")
-    NewsDTO newNews(@RequestBody NewsDTO newNewsDTO) throws ParseException  {
+    NewsDTO newNews(String title, String content, NewsCategory category) {
+        var newNewsDTO = new NewsDTO();
+        newNewsDTO.setTitle(title);
+        newNewsDTO.setContent(content);
+        newNewsDTO.setCategory(category.toString());
+
         var news = convertToEntity(newNewsDTO);
         return convertToDto(newsService.createNews(news));
     }
@@ -50,8 +55,14 @@ public class NewsController {
     }
 
     @PutMapping("/news/{id}")
-    NewsDTO updateNews(@RequestBody News newNews, @PathVariable Long id) {
-        return null;
+    void updateNews(@RequestBody NewsDTO newNews, @PathVariable Long id) {
+        var oldNews = newsService.getNewsById(id);
+
+        oldNews.setTitle(newNews.getTitle());
+        oldNews.setContent(newNews.getContent());
+        oldNews.setCategory(NewsCategory.valueOf(newNews.getCategory()));
+
+        newsService.updateNews(oldNews);
     }
 
     @DeleteMapping("/news/{id}")
@@ -65,10 +76,8 @@ public class NewsController {
         return newsDto;
     }
 
-    private News convertToEntity(NewsDTO newsDto) throws ParseException {
-        News news = modelMapper.map(newsDto, News.class);
-        news.setPublishDate(dateFormat.parse(newsDto.getPublishDate()));
-        return news;
+    private News convertToEntity(NewsDTO newsDto) {
+        return modelMapper.map(newsDto, News.class);
     }
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
