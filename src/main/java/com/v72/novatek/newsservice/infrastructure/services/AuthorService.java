@@ -21,4 +21,9 @@ public class AuthorService implements IAuthorService {
 
         return authors.get(rnd.nextInt(authors.size()));
     }
+
+    @Override
+    public Author getAuthorById(Long id) {
+        return repository.getById(id);
+    }
 }

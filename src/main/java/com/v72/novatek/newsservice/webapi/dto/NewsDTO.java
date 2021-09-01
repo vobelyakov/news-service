@@ -1,22 +1,24 @@
 package com.v72.novatek.newsservice.webapi.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 public class NewsDTO {
 
-    @ApiModelProperty(hidden = true)
     private Long id;
 
+    @NotEmpty
+    @Size(min=3, max=20, message = "Заголовок должен быть от 3 до 20 символов")
     private String title;
 
+    @NotEmpty
     private String content;
 
-    @ApiModelProperty(hidden = true)
     private AuthorDTO author;
 
-    @ApiModelProperty(hidden = true)
     private String publishDate;
 
+    @NotEmpty
     private String category;
 
     public Long getId() {

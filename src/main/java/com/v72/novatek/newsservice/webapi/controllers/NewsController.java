@@ -1,13 +1,15 @@
 package com.v72.novatek.newsservice.webapi.controllers;
 
+import com.v72.novatek.newsservice.core.interfaces.IAuthorService;
 import com.v72.novatek.newsservice.core.interfaces.INewsService;
 import com.v72.novatek.newsservice.webapi.dto.NewsDTO;
 import com.v72.novatek.newsservice.core.models.News;
 import com.v72.novatek.newsservice.core.models.NewsCategory;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +23,9 @@ public class NewsController {
     @Autowired
     private INewsService newsService;
 
+    @Autowired
+    private IAuthorService authorService;
+
     @GetMapping("/news")
     List<NewsDTO> getAllNews() {
         return newsService.getNews()
@@ -32,6 +37,16 @@ public class NewsController {
     @GetMapping("/news/category/{category}")
     List<NewsDTO> getAllNewsByCategory(@PathVariable NewsCategory category) {
         return newsService.getNewsByCategory(category).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/news/author/{id}")
+    List<NewsDTO> getAllNewsByAuthor(@PathVariable Long id) {
+        var author = authorService.getAuthorById(id);
+
+        return newsService.getNewsByAuthor(author)
+                .stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
@@ -55,7 +70,7 @@ public class NewsController {
     }
 
     @PutMapping("/news/{id}")
-    void updateNews(@RequestBody NewsDTO newNews, @PathVariable Long id) {
+    void updateNews(@Validated @RequestBody NewsDTO newNews, @PathVariable Long id) {
         var oldNews = newsService.getNewsById(id);
 
         oldNews.setTitle(newNews.getTitle());
